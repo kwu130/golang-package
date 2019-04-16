@@ -14,7 +14,7 @@ func init() {
 type stack interface{
     Push(interface{})
     Pop()
-    Top() (interface{}, error)
+    Top() interface{}
     IsEmpty() bool
     Clear()
     String() string
