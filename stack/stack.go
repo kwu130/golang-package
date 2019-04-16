@@ -24,11 +24,11 @@ type Stack struct {
     size int
     stack []interface{} 
 }
-
+/*构建一个栈并返回*/
 func New() Stack {
     return Stack{}
 }
-
+/*向栈里增加一个元素*/
 func push(s *Stack, a interface{}) {
     (*s).stack = append((*s).stack, a)
     (*s).size++
@@ -37,7 +37,7 @@ func push(s *Stack, a interface{}) {
 func (s *Stack)Push(a interface{}) {
     push(s, a)
 }
-
+/*删除栈顶元素*/
 func pop(s *Stack) error {
     if isempty(*s) {
         return errors.New("pop() is failed, stack is empty")
@@ -52,7 +52,7 @@ func (s *Stack)Pop() {
         log.Fatal(err)
     }
 }
-
+/*取栈顶元素并返回*/
 func top(s Stack) (interface{}, error) {
     if isempty(s) {
         return nil, errors.New("top() is failed, stack is empty")
@@ -68,7 +68,7 @@ func (s Stack)Top() interface{} {
     }
     return nil
 }
-
+/*判断栈是否为空*/
 func isempty(s Stack) bool {
     return s.size == 0
 }
@@ -76,7 +76,7 @@ func isempty(s Stack) bool {
 func (s Stack)IsEmpty() bool {
     return isempty(s)
 }
-
+/*清空栈*/
 func clear(s *Stack) {
     if (*s).size == 0 {
         return 
@@ -89,7 +89,7 @@ func clear(s *Stack) {
 func (s *Stack)Clear() {
     clear(s)
 }
-
+/*返回栈内所有元素*/
 func (s Stack)String() string {
     return fmt.Sprintf("%v",s.stack)
 }
