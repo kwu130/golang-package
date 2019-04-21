@@ -5,7 +5,7 @@ import (
     "log"
     "errors"
 )
-
+//初始化日志输出
 func init() {
     log.SetPrefix("QUEUE: ")
     log.SetFlags(log.Llongfile)
@@ -31,7 +31,7 @@ type queue interface {
 func New() Queue {
     return Queue{}
 }
-
+//在队尾插入一个元素
 func push(q *Queue, a interface{}) {
     (*q).queue = append((*q).queue, a)
     (*q).tail++
@@ -47,7 +47,7 @@ func push(q *Queue, a interface{}) {
 func (q *Queue)Push(a interface{}) {
     push(q, a)
 }
-
+//从队首删除一个元素
 func pop(q *Queue) error {
     if isempty(*q) {
         return errors.New("pop() is failed, queue is empty")
@@ -62,7 +62,7 @@ func (q *Queue)Pop() {
         log.Fatal(err)
     }
 }
-
+//返回队列第一个元
 func front(q Queue) (interface{}, error) {
     if isempty(q) {
         return nil, errors.New("front() is failed, queue is empty")
@@ -78,7 +78,7 @@ func (q Queue)Front() interface{} {
     }
     return nil
 }
-
+//返回队列最后一个元素
 func back(q Queue) (interface {}, error) {
     if isempty(q) {
         return nil, errors.New("back() is failed, queue is empty")
@@ -94,7 +94,7 @@ func (q Queue)Back() interface{} {
     }
     return nil
 }
-
+//判断队列是否为空
 func isempty(q Queue) bool {
     if q.head >= q.tail {
         return true
@@ -105,7 +105,7 @@ func isempty(q Queue) bool {
 func (q Queue)IsEmpty() bool {
     return isempty(q)
 }
-
+//返回队列长度
 func size(q Queue) int {
     if q.head > q.tail {
         return -1
@@ -121,7 +121,7 @@ func (q Queue)Size() int {
     }
     return 0
 }
-
+//清空队列
 func clear(q *Queue) {
     (*q).queue = (*q).queue[:0]
     (*q).head = 0
@@ -135,7 +135,7 @@ func (q *Queue)Clear() {
 func (q Queue)String() string {
     return fmt.Sprintf("%v", q.queue[q.head:q.tail])
 }
-
-func OutPut(q Queue) {
+//测试用
+func output(q Queue) {
     fmt.Printf("head:%d tail:%d val:%v\n", q.head, q.tail, q.queue[q.head:q.tail])
 }
